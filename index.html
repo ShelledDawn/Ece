@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECE Class of 2026 // Integrated Circuit Singularity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Playfair+Display:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CORE VARIABLE METRICS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --bg-color: #030611;
+            --accent-cyan: #00F2FE;
+            --reactor-glow: rgba(0, 242, 254, 0.25);
+            --text-main: #F0F4F8;
+            --text-muted: #627288;
+            --glass-bg: rgba(9, 15, 32, 0.6);
+            --glass-border: rgba(0, 242, 254, 0.12);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            min-height: 100%;
+            padding-bottom: 80px;
+            overflow-x: hidden;
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(0, 242, 254, 0.012) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0, 242, 254, 0.012) 1px, transparent 1px);
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 130px;
+        }
+
+        /* SCROLL DRIVEN REVEAL SYSTEM */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* TYPOGRAPHY OVERLAYS */
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            line-height: 1.35;
+        }
+        .italic { font-style: italic; }
+        .text-center { text-align: center; }
+        .muted-text { color: var(--text-muted); }
+        .cyan-text { color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0, 242, 254, 0.4); }
+
+        /* ================= QUANTUM ARC REACTOR SYSTEM ================= */
+        .reactor-stage {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .arc-reactor {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,242,254,0.15) 0%, rgba(3,6,17,0.9) 70%);
+            border: 2px dashed rgba(0, 242, 254, 0.2);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.15), inset 0 0 20px rgba(0, 242, 254, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Rotating Outer Alignment Segments */
+        .reactor-ring-outer {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--accent-cyan);
+            border-bottom-color: var(--accent-cyan);
+            opacity: 0.4;
+            animation: rotateClockwise 6s linear infinite;
+        }
+        /* High Velocity Internal Plasma Inductors */
+        .reactor-inductors {
+            position: absolute;
+            width: 105px;
+            height: 105px;
+            border-radius: 50%;
+            border: 6px dotted var(--accent-cyan);
+            opacity: 0.7;
+            filter: drop-shadow(0 0 6px var(--accent-cyan));
+            animation: rotateCounterClockwise 4s linear infinite;
+        }
+        /* Deep Core Energy Grid Point */
+        .reactor-core-eye {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 3px solid var(--accent-cyan);
+            box-shadow: 0 0 25px #FFFFFF, 0 0 40px var(--accent-cyan), 0 0 70px var(--accent-cyan);
+            z-index: 2;
+        }
+        @keyframes rotateClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes rotateCounterClockwise {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        /* HARDWARE SIGNAL NODE STRINGS */
+        .signal-nodes {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            padding-top: 20px;
+            opacity: 0.6;
+        }
+        .node-pulse {
+            width: 4px;
+            height: 4px;
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-cyan);
+            animation: pulse 2s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* HERO DEFINITIONS */
+        .hero {
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .tagline {
+            font-size: 10px;
+            letter-spacing: 0.35em;
+            font-weight: 500;
+        }
+        .hero h1 { font-size: 38px; }
+        .hero p {
+            font-size: 13px;
+            font-family: sans-serif;
+            line-height: 1.65;
+            max-width: 340px;
+        }
+
+        /* TELEMETRY GLASS GRID COMPONENT SETUP */
+        .section-header {
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .meta-log { font-size: 11px; color: var(--text-muted); }
+        .sub-log { font-size: 10px; color: var(--accent-cyan); opacity: 0.8; }
+        .section-title { font-size: 26px; }
+
+        .telemetry-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .glass-pane {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .glass-pane:hover {
+            border-color: rgba(0, 242, 254, 0.35);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+        }
+        .window-dots { display: flex; gap: 5px; }
+        .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: rgba(0, 242, 254, 0.2);
+        }
+        .glass-pane .title { font-size: 10px; color: var(--text-muted); }
+        .glass-pane .cmd { font-size: 11px; color: var(--text-muted); margin-bottom: 2px;}
+        .glass-pane .data { font-size: 13px; font-weight: 700; color: var(--text-main); }
+        .glass-pane .desc { font-size: 10px; color: var(--text-muted); }
+
+        .vhd-code { font-size: 11px; color: var(--text-muted); line-height: 1.6; }
+        .vhd-key { color: var(--accent-cyan); opacity: 0.9; }
+
+        /* TERMINAL CONNECTION HUB LINK CONFIGS */
+        .rsvp-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .rsvp-section p { font-size: 12px; line-height: 1.65; max-width: 350px; }
+        
+        .glass-terminal-box {
+            background: rgba(8, 14, 32, 0.7);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 26px;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
+        }
+        .terminal-header {
+            font-size: 10px;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .glass-terminal-box h4 { font-size: 19px; }
+        .glass-terminal-box p { font-size: 12px; font-family: sans-serif; color: var(--text-muted); }
+        
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 18px;
+            font-size: 12px;
+        }
+
+        .switch-container {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .switch-container input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: .3s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px; width: 16px;
+            left: 3px; bottom: 3px;
+            background-color: var(--text-main);
+            transition: .3s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { 
+            background-color: rgba(0, 242, 254, 0.15); 
+            border-color: var(--accent-cyan);
+        }
+        input:checked + .slider:before { 
+            transform: translateX(20px); 
+            background-color: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .action-pane {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .action-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00F2FE, #00a3fe);
+            border: none;
+            color: #030611;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 6px;
+            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.25);
+        }
+
+        /* CHRONO TIMELINE SIGNAL TRACE COUPLING */
+        .timeline {
+            position: relative;
+            border-left: 1px solid rgba(0, 242, 254, 0.12);
+            margin-left: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 54px;
+        }
+        .timeline-node {
+            position: relative;
+            padding-left: 32px;
+        }
+        .node-dot {
+            position: absolute;
+            left: -5px;
+            top: 4px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 6px var(--accent-cyan);
+        }
+        .glass-photo-frame {
+            background: var(--glass-bg);
+            padding: 14px;
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            display: inline-block;
+            max-width: 230px;
+            margin-bottom: 14px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .photo-pane-mock {
+            background-color: #080f20;
+            width: 100%;
+            height: 130px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.01);
+        }
+        .photo-caption-text { font-size: 10px; color: var(--text-muted); font-style: italic; text-align: center; font-family: sans-serif; }
+        
+        .glass-log-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 14px;
+            border-radius: 6px;
+            max-width: 360px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .glass-log-card .header-id { font-size: 10px; color: var(--text-muted); margin-bottom: 6px; }
+        .glass-log-card p { font-size: 12px; color: var(--text-muted); line-height: 1.6; font-style: italic; }
+        .glass-log-card .stamp { font-size: 9px; color: var(--accent-cyan); margin-top: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* FINALE LAYOUT OVERVIEW */
+        .epilogue {
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 54px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .epilogue h5 { font-size: 10px; letter-spacing: 0.25em; }
+        .epilogue blockquote { font-size: 21px; line-height: 1.5; padding: 0 16px; color: #FFFFFF; }
+        .epilogue p { font-size: 11px; font-family: sans-serif; line-height: 1.65; max-width: 330px; margin: 0 auto; }
+        .execution-success { font-size: 10px; color: rgba(98, 114, 136, 0.35); margin-top: 32px; line-height: 1.6; }
+
+        footer {
+            font-size: 10px;
+            color: rgba(98, 114, 136, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 54px;
+        }
+        footer .bold-stamp { font-weight: 700; color: rgba(0, 242, 254, 0.2); letter-spacing: 0.15em; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="signal-nodes">
+        <span class="node-pulse"></span>
+        <span class="node-pulse"></span>
+        <span class="node-pulse"></span>
+    </div>
+
+    <div class="container">
+
+        <section class="hero text-center reveal">
+            <div class="tagline cyan-text">✦ // COUPLING COMPLETE • BATCH OF 2026</div>
+            
+            <div class="reactor-stage">
+                <div id="reactor-ring" class="reactor-ring-outer"></div>
+                <div id="reactor-inductors" class="reactor-inductors"></div>
+                <div class="reactor-core-eye"></div>
+            </div>
+
+            <h1 class="serif-title">The Power Down<br><span class="italic">Of The Microgrid.</span></h1>
+            <p class="muted-text italic">Four years inside the cleanrooms and structural frequencies. Disconnecting from the main power rail, but leaving the architecture energized forever.</p>
+            
+            <div class="scroll-indicator muted-text">
+                scroll to generate power
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <div class="section-header">
+                <div class="meta-log">// signal_alignment_metrics.log</div>
+                <div class="sub-log">~ read register allocations ~</div>
+                <h3 class="serif-title section-title">Operational Status, Pinned To Core.</h3>
+            </div>
+
+            <div class="telemetry-grid">
+                <div class="glass-pane">
+                    <div class="window-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                    <div class="title"># clock_distribution.cfg</div>
+                    <div>
+                        <div class="cmd">$ echo $DISCONNECTION_DATE</div>
+                        <div class="data cyan-text">May 22, 2026</div>
+                        <div class="desc">Junction Node Lock</div>
+                    </div>
+                </div>
+
+                <div class="glass-pane">
+                    <div class="window-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                    <div class="title"># logic_levels.sys</div>
+                    <div>
+                        <div class="cmd">$ cat operational_window.txt</div>
+                        <div class="data cyan-text">14:00 - 17:00 HRS</div>
+                        <div class="desc">duty_cycle: 100%</div>
+                    </div>
+                </div>
+
+                <div class="glass-pane">
+                    <div class="window-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                    <div class="title"># localized_mesh.map</div>
+                    <div>
+                        <div class="cmd">$ locate semiconductor_lab</div>
+                        <div class="data cyan-text">Lab Room 303</div>
+                        <div class="desc">// source junction matrix</div>
+                    </div>
+                </div>
+
+                <div class="glass-pane">
+                    <div class="window-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                    <div class="title"># hardware_constraints.vhd</div>
+                    <div class="vhd-code">
+                        <span class="vhd-key">capacitors</span>: "blown",<br>
+                        <span class="vhd-key">attenuation</span>: "0dB",<br>
+                        <span class="vhd-key">logic_states</span>: "high"<br>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rsvp-section text-center reveal">
+            <div class="meta-log">$ ./assert_impedance_matching.sh</div>
+            <h3 class="serif-title section-title">Authorize Bridge Connection?</h3>
+            <p class="muted-text">Completing the loop trace before the final state transition. Sync into the channel to establish matching impedances.</p>
+
+            <div class="glass-terminal-box">
+                <div class="terminal-header">
+                    <span>NODE INTEGRITY CHECK: #2026-ECE</span>
+                    <span>14:00 HRS</span>
+                </div>
+                <h4 class="serif-title cyan-text">Attention Engineer,</h4>
+                <p>We have calibrated signal matrices together, tracked noise components over multiple late-night labs, and built logic flows that won't break down under operational stress. One final instruction is loading. Will you be linked?</p>
+                
+                <div class="toggle-row">
+                    <span>Channel Coupling Protocol</span>
+                    <label class="switch-container">
+                        <input type="checkbox" id="rsvp-trigger" onchange="handleRSVPToggle()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div id="action-drawer" class="action-pane">
+                    <button class="action-btn">Latching Signal Route Now →</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <div class="section-header">
+                <div class="meta-log">// scope_capture --channel-all-traces</div>
+                <div class="sub-log">~ immutable logs stored in non-volatile storage ~</div>
+                <h3 class="serif-title section-title">The Signal Waveforms</h3>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-node reveal">
+                    <span class="node-dot"></span>
+                    
+                    <div class="glass-photo-frame">
+                        <div class="photo-pane-mock">[ System Integration Snap ]</div>
+                        <div class="photo-caption-text">"Operating perfectly at peak thermal dissipation."</div>
+                    </div>
+
+                    <div class="glass-log-card">
+                        <div class="header-id">register_allocation: 0x7FFFAD820 • STATE-4Y</div>
+                        <p>"Compiled 4 years of clean data blocks, logic shifts, and high voltage feedback arrays. No hardware emulation could duplicate what happened inside this circuit layout."</p>
+                        <div class="stamp">ECE Core Nodes • Locked State</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="epilogue text-center reveal">
+            <div class="cyan-text">✦ SYSTEM ARCHIVE RUNOUT SUMMARY ✦</div>
+            <blockquote class="serif-title italic">"Do not mourn the attenuation of the waveform. Celebrate the amplitude it achieved at resonance."</blockquote>
+            <p class="muted-text italic">To every breadboard layout that trace-routed our collective logic, every signal cascade, and the structural resonances that connected our paths across the cleanrooms.</p>
+            
+            <div class="execution-success">
+                // System execution terminated. Parameters saved.<br>
+                Gain Vector → Continuous Tracking [∞]
+            </div>
+
+            <footer class="text-center">
+                <div>Organised by Department of Electronics & Communication Engineering</div>
+                <div class="bold-stamp">Microgrid Shutdown Sequence Completed // 2026</div>
+            </footer>
+        </section>
+
+    </div>
+
+    <script>
+        // RSVP ACTION DRAWER LOGIC
+        function handleRSVPToggle() {
+            var checkbox = document.getElementById('rsvp-trigger');
+            var drawer = document.getElementById('action-drawer');
+            if (checkbox.checked) {
+                drawer.style.maxHeight = "70px";
+            } else {
+                drawer.style.maxHeight = "0px";
+            }
+        }
+
+        // HIGHER PERFORMANCE INTERSECTION OBSERVER SCROLL REVEAL MANAGEMENT
+        document.addEventListener("DOMContentLoaded", function() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: "0px 0px -40px 0px"
+            });
+
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+
+            // INTERACTIVE INTERACTIVE ARC REACTOR SCROLL VELOCITY ENGINE ACTIVATOR
+            const outerRing = document.getElementById('reactor-ring');
+            const innerInductors = document.getElementById('reactor-inductors');
+
+            window.addEventListener('scroll', function() {
+                let scrollPos = window.scrollY;
+                // Dynamically throttle animation speed metrics according to page offset tracking
+                let velocityFactor = 1 + (scrollPos * 0.015);
+                
+                // Keep capping speeds safely within cleanroom operating limits
+                if(velocityFactor > 12) velocityFactor = 12; 
+
+                outerRing.style.animationDuration = `${6 / velocityFactor}s`;
+                innerInductors.style.animationDuration = `${4 / velocityFactor}s`;
+            });
+        });
+    </script>
+</body>
+</html>
